@@ -1,55 +1,12 @@
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from aiogram import Bot, Dispatcher, types
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.utils import executor
 
-TOKEN = Bot(token="5954555236:AAE6ffahMQeqGQqhIz49stC5B4zVieACnUs")
-dp = Dispatcher(TOKEN, storage=MemoryStorage())
+from markups import *
+from setting import TOKEN
 
-gro_text: str = "Газпром газораспределение"
-rkg_text: str = "Газпром межрегионгаз"
-back_text: str = "Назад"
-
-gro_contract: str = "Действующий договор ТО ВДГО"
-gro_planned_date: str = "Планируемая дата ТО ВДГО"
-gro_amount_debt: str = "Сумма задолженности за ТО ВДГО"
-gro_applic_same: str = "Заявка на ТО ВДГО"
-gro_price_list: str = "Прейскурант цен на услуги ГРО"
-gro_safety_rules: str = "Правила газовой безопасности"
-gro_contact: str = "Контакты"
-gro_applic_same: str = "Узнать статус заявки на догазификацию"
-gro_inretact_map: str = "Интерактивная карта догазификации"
-
-rkg_amount_debt: str = "Сумма задолженности"
-rkg_date_amount: str = "Дата и сумма последней оплаты"
-rkg_date_value: str = "Дата и величина (числовое значение) последних показаний счетчика"
-rkg_transm_meter_read: str = "Передача показаний счетчика"
-rkg_list_doc: str = "Перечень документов для переоформления лицевого счета и для изменения параметров лицевого счета по категориям"
-rkg_req_cont_reasons: str = "Заявка на выход контролера по причинам"
-rkg_about_proced_gaz: str = "Информирование о порядке возобновления поставки газа по категориям"
-rkg_about_term_contr: str = "Информирование о порядке расторжения договора поставки"
-
-gro_bt = KeyboardButton(gro_text)
-rkg_bt = KeyboardButton(rkg_text)
-back_bt = KeyboardButton(back_text)
-
-mr_start = ReplyKeyboardMarkup(
-    resize_keyboard=True, one_time_keyboard=True
-).row(
-    gro_bt, rkg_bt
-)
-
-mr_gro = ReplyKeyboardMarkup(
-    resize_keyboard=True, one_time_keyboard=True
-).row(
-    back_text
-)
-
-mr_rkg = ReplyKeyboardMarkup(
-    resize_keyboard=True, one_time_keyboard=True
-).row(
-    back_text
-)
+bot = Bot(token=TOKEN)
+dp = Dispatcher(bot, storage=MemoryStorage())
 
 
 @dp.message_handler(commands=["start"])
@@ -77,10 +34,131 @@ async def gro_command(message: types.Message):
 
 
 @dp.message_handler(text=rkg_text)
-async def gro_command(message: types.Message):
+async def rkg_command(message: types.Message):
     await message.answer(
         "Для продолжения нажмите на кнопку.",
         reply_markup=mr_rkg
+    )
+
+
+# gro
+@dp.message_handler(text=gro_contract)
+async def gro_contract_command(message: types.Message):
+    await message.answer(
+        gro_contract
+    )
+
+
+@dp.message_handler(text=gro_planned_date)
+async def gro_planned_date_command(message: types.Message):
+    await message.answer(
+        gro_planned_date
+    )
+
+
+@dp.message_handler(text=gro_amount_debt)
+async def gro_amount_debt_command(message: types.Message):
+    await message.answer(
+        gro_amount_debt
+    )
+
+
+@dp.message_handler(text=gro_applic_same)
+async def gro_applic_same_command(message: types.Message):
+    await message.answer(
+        gro_applic_same
+    )
+
+
+@dp.message_handler(text=gro_price_list)
+async def gro_price_list_command(message: types.Message):
+    await message.answer(
+        gro_price_list
+    )
+
+
+@dp.message_handler(text=gro_safety_rules)
+async def gro_safety_rules_command(message: types.Message):
+    await message.answer(
+        gro_safety_rules
+    )
+
+
+@dp.message_handler(text=gro_contact)
+async def gro_contact_command(message: types.Message):
+    await message.answer(
+        gro_contact
+    )
+
+
+@dp.message_handler(text=gro_applic_same)
+async def gro_applic_same_command(message: types.Message):
+    await message.answer(
+        gro_applic_same
+    )
+
+
+@dp.message_handler(text=gro_inretact_map)
+async def gro_inretact_map_command(message: types.Message):
+    await message.answer(
+        gro_inretact_map
+    )
+
+
+# rkg
+@dp.message_handler(text=rkg_amount_debt)
+async def rkg_amount_debt_command(message: types.Message):
+    await message.answer(
+        rkg_amount_debt
+    )
+
+
+@dp.message_handler(text=rkg_date_amount)
+async def rkg_date_amount_command(message: types.Message):
+    await message.answer(
+        rkg_date_amount
+    )
+
+
+@dp.message_handler(text=rkg_date_value)
+async def rkg_date_value_command(message: types.Message):
+    await message.answer(
+        rkg_date_value
+    )
+
+
+@dp.message_handler(text=rkg_transm_meter_read)
+async def rkg_transm_meter_read_command(message: types.Message):
+    await message.answer(
+        rkg_transm_meter_read
+    )
+
+
+@dp.message_handler(text=rkg_list_doc)
+async def rkg_list_doc_command(message: types.Message):
+    await message.answer(
+        rkg_list_doc
+    )
+
+
+@dp.message_handler(text=rkg_req_cont_reasons)
+async def rkg_req_cont_reasons_command(message: types.Message):
+    await message.answer(
+        rkg_req_cont_reasons
+    )
+
+
+@dp.message_handler(text=rkg_about_proced_gaz)
+async def rkg_about_proced_gaz_command(message: types.Message):
+    await message.answer(
+        rkg_about_proced_gaz
+    )
+
+
+@dp.message_handler(text=rkg_about_term_contr)
+async def rkg_about_term_contr_command(message: types.Message):
+    await message.answer(
+        rkg_about_term_contr
     )
 
 
